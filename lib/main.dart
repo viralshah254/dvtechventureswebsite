@@ -323,6 +323,7 @@ class _OnePageWebsiteState extends State<OnePageWebsite> {
     );
   }
 
+
   Widget _buildProductCard(
       String title, String description, Color color, String? logoPath) {
     return Card(
