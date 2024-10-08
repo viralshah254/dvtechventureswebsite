@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:flutter_staggered_animations/flutter_staggered_animations.dart'; // Package for animations
-import 'dart:html' as html; // Import this for web link handling
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'dart:html' as html;
 
 void main() {
   runApp(DVTechVenturesWebsite());
@@ -14,8 +14,8 @@ class DVTechVenturesWebsite extends StatelessWidget {
     return MaterialApp(
       title: 'DV Tech Ventures',
       theme: ThemeData(
-        primaryColor: Color(0xFF004D40), // Dark green
-        hintColor: Color(0xFFFFD700), // Gold
+        primaryColor: Color(0xFF004D40),
+        hintColor: Color(0xFFFFD700),
         textTheme: GoogleFonts.latoTextTheme(),
         appBarTheme: AppBarTheme(
           backgroundColor: Color(0xFF004D40),
@@ -33,8 +33,7 @@ class OnePageWebsite extends StatefulWidget {
 }
 
 class _OnePageWebsiteState extends State<OnePageWebsite> {
-  final GlobalKey topKey =
-      GlobalKey(); // Added top key for scrolling to the top
+  final GlobalKey topKey = GlobalKey();
   final GlobalKey aboutKey = GlobalKey();
   final GlobalKey productsKey = GlobalKey();
   final GlobalKey footerKey = GlobalKey();
@@ -58,7 +57,7 @@ class _OnePageWebsiteState extends State<OnePageWebsite> {
         builder: (context, constraints) {
           return SingleChildScrollView(
             child: Padding(
-              key: topKey, // Use topKey here to mark the very top of the page
+              key: topKey,
               padding: EdgeInsets.symmetric(
                 horizontal: constraints.maxWidth > 600 ? 60.0 : 16.0,
               ),
@@ -88,8 +87,7 @@ class _OnePageWebsiteState extends State<OnePageWebsite> {
         backgroundColor: Color(0xFFFFD700),
         child: Icon(Icons.arrow_upward, color: Colors.white),
         onPressed: () {
-          _scrollToSection(
-              topKey); // Scroll to the top key instead of the aboutKey
+          _scrollToSection(topKey);
         },
       ),
     );
@@ -130,14 +128,16 @@ class _OnePageWebsiteState extends State<OnePageWebsite> {
   }
 
   Widget _buildHeroSection(BuildContext context, BoxConstraints constraints) {
+    final isMobile = constraints.maxWidth < 600;
+
     return Container(
-      height: constraints.maxWidth > 600 ? 600 : 400,
+      height: isMobile ? 300 : 600,
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
             Color(0xFF1E90FF),
             Color(0xFF004D40)
-          ], // Blue to Green gradient
+          ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
@@ -151,7 +151,7 @@ class _OnePageWebsiteState extends State<OnePageWebsite> {
                 TypewriterAnimatedText(
                   'DV Tech Ventures - A Venture Studio for Tomorrow\'s Innovations',
                   textStyle: TextStyle(
-                    fontSize: constraints.maxWidth > 600 ? 40 : 28,
+                    fontSize: isMobile ? 24 : 40,
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                     shadows: [
@@ -173,9 +173,9 @@ class _OnePageWebsiteState extends State<OnePageWebsite> {
                 _scrollToSection(aboutKey);
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: Color(0xFFFFD700), // Gold button
-                padding: EdgeInsets.symmetric(horizontal: 32, vertical: 16),
-                textStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                backgroundColor: Color(0xFFFFD700),
+                padding: EdgeInsets.symmetric(horizontal: 32, vertical: isMobile ? 10 : 16),
+                textStyle: TextStyle(fontSize: isMobile ? 14 : 18, fontWeight: FontWeight.bold),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20.0),
                 ),
@@ -205,14 +205,14 @@ class _OnePageWebsiteState extends State<OnePageWebsite> {
                   style: TextStyle(
                       fontSize: 28,
                       fontWeight: FontWeight.bold,
-                      color: Color(0xFFFFD700)), // Gold for title
+                      color: Color(0xFFFFD700)),
                 ),
                 SizedBox(height: 16),
                 Text(
                   content,
                   style: TextStyle(
                       fontSize: 18,
-                      color: Color(0xFF004D40)), // Dark green for content
+                      color: Color(0xFF004D40)),
                 ),
               ],
             ),
@@ -264,7 +264,7 @@ class _OnePageWebsiteState extends State<OnePageWebsite> {
     return Expanded(
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-        color: Color(0xFF1E90FF).withOpacity(0.1), // Light blue background
+        color: Color(0xFF1E90FF).withOpacity(0.1),
         elevation: 5,
         shadowColor: Colors.grey.withOpacity(0.5),
         child: Padding(
@@ -277,7 +277,7 @@ class _OnePageWebsiteState extends State<OnePageWebsite> {
                 style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
-                    color: Color(0xFF004D40)), // Dark green title
+                    color: Color(0xFF004D40)),
               ),
               SizedBox(height: 8),
               Text(
@@ -328,8 +328,7 @@ class _OnePageWebsiteState extends State<OnePageWebsite> {
       String title, String description, Color color, String? logoPath) {
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-      color:
-          color.withOpacity(0.1), // Light color background for differentiation
+      color: color.withOpacity(0.1),
       elevation: 5,
       shadowColor: Colors.grey.withOpacity(0.5),
       margin: EdgeInsets.only(bottom: 16),
@@ -375,12 +374,11 @@ class _OnePageWebsiteState extends State<OnePageWebsite> {
     return Container(
       key: footerKey,
       padding: EdgeInsets.all(32),
-      color: Color(0xFF004D40), // Dark green background
+      color: Color(0xFF004D40),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          // Left side of the footer with contact info
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -407,7 +405,6 @@ class _OnePageWebsiteState extends State<OnePageWebsite> {
               ),
             ],
           ),
-          // Right side of the footer with LinkedIn link
           Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
