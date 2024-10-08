@@ -134,10 +134,7 @@ class _OnePageWebsiteState extends State<OnePageWebsite> {
       height: isMobile ? 300 : 600,
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [
-            Color(0xFF1E90FF),
-            Color(0xFF004D40)
-          ],
+          colors: [Color(0xFF1E90FF), Color(0xFF004D40)],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
@@ -174,8 +171,10 @@ class _OnePageWebsiteState extends State<OnePageWebsite> {
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Color(0xFFFFD700),
-                padding: EdgeInsets.symmetric(horizontal: 32, vertical: isMobile ? 10 : 16),
-                textStyle: TextStyle(fontSize: isMobile ? 14 : 18, fontWeight: FontWeight.bold),
+                padding: EdgeInsets.symmetric(
+                    horizontal: 32, vertical: isMobile ? 10 : 16),
+                textStyle: TextStyle(
+                    fontSize: isMobile ? 14 : 18, fontWeight: FontWeight.bold),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20.0),
                 ),
@@ -210,9 +209,7 @@ class _OnePageWebsiteState extends State<OnePageWebsite> {
                 SizedBox(height: 16),
                 Text(
                   content,
-                  style: TextStyle(
-                      fontSize: 18,
-                      color: Color(0xFF004D40)),
+                  style: TextStyle(fontSize: 18, color: Color(0xFF004D40)),
                 ),
               ],
             ),
@@ -232,28 +229,60 @@ class _OnePageWebsiteState extends State<OnePageWebsite> {
           Text(
             'About Us',
             style: TextStyle(
-                fontSize: 28,
-                fontWeight: FontWeight.bold,
-                color: Color(0xFFFFD700)),
+              fontSize: 28,
+              fontWeight: FontWeight.bold,
+              color: Color(0xFFFFD700),
+            ),
           ),
           SizedBox(height: 16),
           Text(
             'DV Tech Ventures operates as a venture studio and incubator, committed to building and investing in transformative startups. '
             'We are passionate about innovation and dedicated to providing the resources, guidance, and capital necessary for success. '
             'With plans to enter the venture capital space in mid-2025, we look forward to expanding our impact.\n',
-            style: TextStyle(fontSize: 18, color: Color(0xFF004D40)),
+            style: TextStyle(
+              fontSize: 18,
+              color: Color(0xFF004D40),
+            ),
           ),
-          Row(
-            children: [
-              _buildAboutCard('Venture Studio',
-                  'We create and build ventures in-house, turning ideas into successful companies.'),
-              SizedBox(width: 16),
-              _buildAboutCard('Incubator',
-                  'We help promising startups by providing resources and expertise.'),
-              SizedBox(width: 16),
-              _buildAboutCard('Venture Capital',
-                  'Coming in mid-2025: We will invest in early-stage startups to accelerate their growth.'),
-            ],
+          // Responsive row of cards, optimized for mobile
+          LayoutBuilder(
+            builder: (context, constraints) {
+              if (constraints.maxWidth < 600) {
+                // On mobile, stack the cards vertically
+                return Column(
+                  children: [
+                    _buildAboutCard('Venture Studio',
+                        'We create and build ventures in-house, turning ideas into successful companies.'),
+                    SizedBox(height: 16),
+                    _buildAboutCard('Incubator',
+                        'We help promising startups by providing resources and expertise.'),
+                    SizedBox(height: 16),
+                    _buildAboutCard('Venture Capital',
+                        'Coming in mid-2025: We will invest in early-stage startups to accelerate their growth.'),
+                  ],
+                );
+              } else {
+                // On larger screens, show the cards in a row
+                return Row(
+                  children: [
+                    Expanded(
+                      child: _buildAboutCard('Venture Studio',
+                          'We create and build ventures in-house, turning ideas into successful companies.'),
+                    ),
+                    SizedBox(width: 16),
+                    Expanded(
+                      child: _buildAboutCard('Incubator',
+                          'We help promising startups by providing resources and expertise.'),
+                    ),
+                    SizedBox(width: 16),
+                    Expanded(
+                      child: _buildAboutCard('Venture Capital',
+                          'Coming in mid-2025: We will invest in early-stage startups to accelerate their growth.'),
+                    ),
+                  ],
+                );
+              }
+            },
           ),
         ],
       ),
@@ -322,7 +351,6 @@ class _OnePageWebsiteState extends State<OnePageWebsite> {
       ),
     );
   }
-
 
   Widget _buildProductCard(
       String title, String description, Color color, String? logoPath) {
